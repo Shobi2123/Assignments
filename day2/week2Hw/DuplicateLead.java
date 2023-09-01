@@ -70,7 +70,7 @@ public class DuplicateLead {
    String DuplicateID = driver.findElement(By.xpath("//span[@id='viewLead_firstName_sp']")).getText();
    System.out.println("The name of the duplicate lead name: " +DuplicateID);
   
-   if(DuplicateID==LeadName) {
+   if(DuplicateID.equals(LeadName)) {
   System.out.println("The actual name and duplicate ID matches");
    }
    
