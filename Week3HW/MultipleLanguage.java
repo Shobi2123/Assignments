@@ -5,7 +5,7 @@ public abstract class MultipleLanguage implements Language{
 	public abstract void ruby();		
 	
 	public void python() {
-				System.out.println("Python");
+				System.out.println("The language chosen is Python");
 			
 			
 }
