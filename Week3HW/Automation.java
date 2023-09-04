@@ -2,10 +2,8 @@ package Week3HW;
 
 public class Automation extends MultipleLanguage implements TestTool,Language{
 
-	public Automation auto;
 	@Override
 	public void Java() {
-		auto=new Automation();
 		System.out.println("The language chosen is java");
 		
 	}
@@ -28,10 +26,5 @@ public class Automation extends MultipleLanguage implements TestTool,Language{
 		auto.Java();
 		auto.ruby();
 		auto.Selenium();
+		auto.python();
 	}
-
-	//private void getname(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
