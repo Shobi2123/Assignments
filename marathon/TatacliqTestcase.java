@@ -1,14 +1,19 @@
 package marathon;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,7 +22,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class TatacliqTestcase {
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 	
 	
 	// Handle the browser notifications
@@ -144,12 +149,36 @@ public class TatacliqTestcase {
 					//click the cart
 					driver.findElement(By.xpath("//div[@class='DesktopHeader__myBagShow']")).click();
 					
+					driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);	
 					
-					 System.out.println("Page title is : " + driver.getTitle());
+					//take screenshot of the exact produck in cart
+					WebElement scrollEle = driver.findElement(By.xpath("//div[@class='CartItemForDesktop__informationText']"));
+					 Actions builder=new Actions(driver);
+					 builder.scrollToElement(scrollEle).perform();
+
+					//Capture screenshot
+					TakesScreenshot ts = (TakesScreenshot)driver;
+
+                     //capture screenshot as output type FILE
+                File file = ts.getScreenshotAs(OutputType.FILE);
+
+                  try {
+                     //save the screenshot taken in destination path
+	FileUtils.copyFile(file, new File("./ScreenShot_Folder/Testcliq.png"));
+      } catch (IOException e) {
+	e.printStackTrace();
+}
+System.out.println("the Cart page screenshot is taken");
 			
 					
+					
+					System.out.println("Page title is : " + driver.getTitle());
+					 
 				//switch back to parent window
 				driver.switchTo().window(handles.get(0));
+				
+				
+				
 				
 				driver.quit();
 				
